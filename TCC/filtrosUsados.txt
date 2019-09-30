@@ -1,0 +1,10 @@
+criação do atributo status
+weka.filters.unsupervised.attribute.AddExpression -E a6/a6+0 -N status
+Reverte a ordem
+weka.filters.unsupervised.attribute.Reorder -R last-first
+Adiciona valores ausentes
+weka.filters.unsupervised.attribute.ReplaceMissingWithUserConstant -A first -N 0 -R 0 -D 0 -F "yyyy-MM-dd\'T\'HH:mm:ss"
+Numerio para nominal
+weka.filters.unsupervised.attribute.NumericToNominal -R first
+Reverte a ordem
+weka.filters.unsupervised.attribute.Reorder -R last-first

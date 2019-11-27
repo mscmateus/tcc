@@ -288,7 +288,7 @@ public class SlidingValidation {
 		
 		
 		
-		escritor(passo+","+confusionMatrixAccuracy());
+		escritor(passo+","+confusionMatrixAccuracy()+"%");
 		
 		text.append("\nAccuracy:                         "+ confusionMatrixAccuracy()+"%");		
 		text.append("\nKappa statistic:                  "+ confusionMatrixKappa());

@@ -1,8 +1,8 @@
 base = [
-5,8,20,21,23,31,32,33,34,39,42,43,44,47,53,57
+9,13,23,3,15,16
 ]
 
-for i in range(1,58):
+for i in range(1,54):
    try:
       base.index(i)
    except :

@@ -17,6 +17,7 @@ for line in file:
       print(str(atribut))
       conta+=1
    break
+break
       # atributos=line.split(,)
       # print("Atributos no arquivo "+str(cvsFile)+":"+str(len(row)))
       # break

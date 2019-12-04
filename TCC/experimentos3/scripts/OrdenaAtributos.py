@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 import csv
+import re
 
 atributos = [
 "projeto"  
@@ -23,7 +24,6 @@ atributos = [
 ,"new_entropy"
 ,"entropy_diff"
 ,"commits_on_files_touched"
-,"files_name"
 ,"commits_to_hottest_file"
 ,"hotness"
 ,"at_mentions_description"
@@ -61,29 +61,34 @@ atributos = [
 def valores():
    matriz = []
    matriz.append(atributos)
-   auxAtributos = atributos.copy()
-   file = open("appinum.txt")
-   inicio = 0
+   linha = iniciaLinha(len(atributos))
+   file = open("resultado.txt", newline="")
+   primeiro = True
+   valor = []
    for line in file:
-      valor = []
-      valor.append(line.replace(" ","",-1).split("(")[0])
-      valor.append(line.replace(" ","",-1).split("(")[1].split(")")[1].replace("\n",""))
+      valor = re.sub(r'\(.+?\)',";",line.replace(" ","")).replace(".",",").replace("\n","").split(";")
       if valor[1] == "projeto":
-         if inicio < 1:
-            inicio = 1
-            possicao = auxAtributos.index(valor[1])
-            auxAtributos[possicao] = valor[0]
+         if primeiro == True:
+            primeiro = False
+            linha[atributos.index(valor[1])] = valor[0]
          else:
-            matriz.append(auxAtributos)
-            auxAtributos = atributos.copy()
-            possicao = auxAtributos.index(valor[1])
-            auxAtributos[possicao] = valor[0]
+            matriz.append(linha)
+            linha = iniciaLinha(len(atributos))
+            linha[atributos.index(valor[1])] = valor[0]
       else:
-         possicao = auxAtributos.index(valor[1])
-         auxAtributos[possicao] = valor[0].replace(".",",")
-   matriz.append(auxAtributos)
+         linha[atributos.index(valor[1])] = valor[0]
+   matriz.append(linha)
    return matriz
-      
+
+def iniciaLinha(size):
+   aux = []
+   for i in range(0,size):
+      aux.append("")
+   return aux
+
 file = open("resultados.csv","w",newline='')
 csvFile = csv.writer(file, delimiter=';')
 csvFile.writerows(valores())
+# file = open("resultado.txt")
+# for line in file:
+#    print(re.sub(r'\(.+?\)',";",line.replace(" ","")).replace(".",",").replace("\n","").split(";"))

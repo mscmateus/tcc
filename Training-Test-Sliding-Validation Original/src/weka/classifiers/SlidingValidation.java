@@ -280,7 +280,7 @@ public class SlidingValidation {
 		//double precision = confusionMatrixPrecision(), recall = confusionMatrixRecall();
 		text.append("\nCorrectly Classified Instances:   "+ somaDP +" ("+(somaDP*100)/somaTotal+"%)");
 		text.append("\nIncorrectly Classified Instances: "+ (somaTotal - somaDP)+" ("+((somaTotal - somaDP)*100)/somaTotal+"%)");
-		escritor("%");
+		escritor(confusionMatrixAccuracy()+"%");
 		text.append("\nAccuracy:                         "+ confusionMatrixAccuracy()+"%");
 		text.append("\nKappa statistic:                  "+ confusionMatrixKappa());
 		//text.append("\nRecall avg:                       "+ recall);
